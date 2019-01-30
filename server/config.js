@@ -40,7 +40,7 @@ let prizes = [{
  */
 const EACH_COUNT = [1, 1, 1, 1, 1, 5];
 
-const COMPANY = 'Tenda';
+const COMPANY = 'MoShang';
 const ROW_COUNT = 7;
 const COLUMN_COUNT = 17;
 

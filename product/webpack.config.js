@@ -34,7 +34,7 @@ module.exports = {
         new webpack.BannerPlugin('版权所有，翻版必究'),
         new HtmlWebpackPlugin({
             template: __dirname + '/src/lottery/index.html',
-            filename: './lottery.html',
+            filename: './index.html',
             minify: {
                 // 移除空属性
                 removeEmptyAttributes: true,

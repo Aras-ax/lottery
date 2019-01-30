@@ -1,0 +1,464 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(to bottom, #131313 0%, #02101c 100%);
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+    ;
+    overflow: hidden;
+}
+
+a {
+    color: #ffffff;
+}
+
+.none {
+    display: none;
+}
+
+
+#container {
+    z-index: 3;
+    position: relative;
+    margin: 0 15vh;
+}
+
+#menu {
+    z-index: 4;
+    margin-left: 15vh;
+}
+
+.canvas-box {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+#info {
+    position: absolute;
+    width: 100%;
+    color: #ffffff;
+    padding: 5px;
+    font-family: Monospace;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+}
+
+#menu {
+    position: absolute;
+    bottom: 2vh;
+    width: 100%;
+    text-align: center;
+}
+
+.element {
+    width: 12vh;
+    height: 16vh;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+    border: 1px solid rgba(127, 255, 255, 0.25);
+    text-align: center;
+    cursor: default;
+    transition: background-color .3s ease-in;
+}
+
+.element:hover {
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.75);
+    border: 1px solid rgba(127, 255, 255, 0.75);
+}
+
+.element .company {
+    position: absolute;
+    top: 1.2vh;
+    right: 1.2vh;
+    font-size: 2vh;
+    color: rgba(127, 255, 255, 0.75);
+}
+
+.element .name {
+    position: absolute;
+    top: 4.6vh;
+    left: 0;
+    right: 0;
+    font-size: 3.2vh;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 0 1vh rgba(0, 255, 255, 0.95);
+}
+
+.element .details {
+    position: absolute;
+    bottom: 1.2vh;
+    left: 0;
+    right: 0;
+    font-size: 1.6vh;
+    color: rgba(127, 255, 255, 0.75);
+}
+
+button {
+    color: rgba(127, 255, 255, 0.75);
+    background: transparent;
+    outline: 1px solid rgba(127, 255, 255, 0.75);
+    border: 0;
+    padding: 1.6vh 4vh;
+    margin: 0 4.6vh;
+    font-size: 2vh;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgba(0, 255, 255, 0.5);
+}
+
+button:active {
+    color: #000000;
+    background-color: rgba(0, 255, 255, 0.75);
+}
+
+.highlight {
+    background-color: rgba(253, 105, 0, 0.95) !important;
+    box-shadow: 0 0 12px rgba(253, 105, 0, 0.95);
+    border: 1px solid rgba(253, 105, 0, 0.25);
+}
+
+.highlight.element .name {
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.95);
+}
+
+
+.prize.element .name {
+    text-shadow: none;
+}
+
+.prize.element {
+    transition: background-color 1.5s ease-in .3s;
+    background-color: rgba(253, 105, 0, 0.85) !important;
+    box-shadow: 0 0 12px rgba(253, 105, 0, 0.95);
+}
+
+.prize .company,
+.prize .details,
+.prize .name,
+.highlight .company,
+.highlight .name,
+.highlight .details {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.dan-mu {
+    visibility: hidden;
+    position: fixed;
+    z-index: -1;
+    font-size: 12px;
+    top: 1vh;
+    left: 0;
+    padding: 0 1.2vh;
+    height: 2.2vh;
+    line-height: 2.2vh;
+    border-radius: 1vh;
+    box-sizing: border-box;
+    background-color: rgba(0, 127, 127, 0.37);
+    box-shadow: 0 0 4px rgba(0, 255, 255, 0.5);
+    border: 1px solid rgba(127, 255, 255, 0.25);
+    color: rgba(127, 255, 255, 0.75);
+}
+
+.dan-mu.active {
+    visibility: visible;
+}
+
+#prizeBar {
+    position: fixed;
+    left: 0;
+    padding-left: 1.2vh;
+    top: 1.2vh;
+    z-index: 2;
+}
+
+.prize-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.prize-item {
+    padding: 9px;
+    margin: 6px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    flex-wrap: nowrap;
+    background-color: rgba(0, 127, 127, 0.37);
+    border: 1px solid rgba(127, 255, 255, 0.25);
+    color: rgba(127, 255, 255, 0.75);
+    width: 30vh;
+    height: 10vh;
+    box-sizing: border-box;
+    transition: transform 1s ease-in;
+}
+
+.prize-item .prize-img {
+    width: 8vh;
+    height: 8vh;
+    margin-right: 1.2vh;
+    border-radius: 50%;
+    background-color: #fff;
+    text-shadow: 0 0 1vh rgba(0, 255, 255, 0.95);
+    overflow: hidden;
+}
+
+.prize-img img {
+    width: 90%;
+    height: 90%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.prize-text {
+    flex: 1;
+}
+
+.prize-title {
+    margin: 4px 0;
+    font-size: 1.8vh;
+}
+
+.prize-count {
+    padding: 4px 0;
+    position: relative;
+}
+
+.prize-count .progress {
+    height: 1.8vh;
+    background: rgba(0, 0, 0, .5);
+    padding: 1px;
+    overflow: visible;
+    border-radius: 1vh;
+}
+
+.progress .progress-bar {
+    border-radius: 1.8vh;
+    position: relative;
+    animation: animate-positive 2s;
+    background-color: #d9534f;
+    height: 1.8vh;
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
+}
+
+.progress-bar.active {
+    animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 2s;
+}
+
+
+.progress-bar-striped {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    -webkit-background-size: 8px 8px;
+    background-size: 8px 8px;
+}
+
+@-webkit-keyframes animate-positive {
+    0% {
+        width: 0;
+    }
+}
+
+@keyframes animate-positive {
+    0% {
+        width: 0;
+    }
+}
+
+
+@-webkit-keyframes progress-bar-stripes {
+    from {
+        background-position: 8px 0
+    }
+
+    to {
+        background-position: 0 0
+    }
+}
+
+@-o-keyframes progress-bar-stripes {
+    from {
+        background-position: 8px 0
+    }
+
+    to {
+        background-position: 0 0
+    }
+}
+
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 8px 0
+    }
+
+    to {
+        background-position: 0 0
+    }
+}
+
+.prize-count-left {
+    position: absolute;
+    color: #fff;
+    right: 9px;
+    font-size: 1.8vh;
+    line-height: 1.6vh;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.shine {
+    box-shadow: 0 0 15px 0 rgba(0, 255, 255, .5);
+    transform: scale(1.2);
+    transform-origin: left center;
+    position: relative;
+}
+
+.shine:before,
+.shine:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    content: '';
+    z-index: 1;
+    margin: 0;
+    box-shadow: inset 0 0 0 1px;
+    border-radius: 4px;
+    animation: clipMe 8s linear infinite;
+}
+
+.shine:before {
+    animation-delay: -4s;
+}
+
+.done {
+    position: relative;
+}
+
+.done:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    cursor: not-allowed;
+}
+
+@keyframes clipMe {
+
+    0%,
+    100% {
+        clip: rect(0, 30vh, 1px, 0);
+    }
+
+    25% {
+        clip: rect(0, 1px, 10vh, 0);
+    }
+
+    50% {
+        clip: rect(9.9vh, 30vh, 10vh, 0);
+    }
+
+    75% {
+        clip: rect(0, 30vh, 10vh, 29.9vh);
+    }
+}
+
+.shine.prize-item {
+    /* width: 24vh; */
+    margin: 1.8vh 0;
+}
+
+.prize-mess {
+    color: #fff;
+    line-height: 5vh;
+    font-size: 1.6vh;
+    margin: 2.4vh 0;
+}
+
+.prize-shine {
+    font-size: 5vh;
+    font-weight: bold;
+    color: #db5c58;
+    vertical-align: middle;
+    padding: 0 6px;
+}
+
+.qipao-container {
+    position: fixed;
+    right: 0;
+    top: 10vh;
+    bottom: 1vh;
+    width: 24vh;
+    z-index: 2;
+}
+
+.qipao {
+    width: 100%;
+    padding: 1.8vh 1.4vh;
+    line-height: 1.414;
+    margin: 4px 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: rgba(127, 255, 255, 0.25);
+    color: rgba(127, 255, 255, 0.75);
+}
+
+.music {
+    position: fixed;
+    top: 3vh;
+    right: 4vh;
+    z-index: 5;
+}
+
+.music-item {
+    display: block !important;
+    opacity: 0;
+}
+
+.music-box {
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 5vh;
+    font-size: 1.4vh;
+    color: #fff;
+    cursor: pointer;
+    background-color: rgba(253, 105, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, .5);
+}
+
+.rotate-active {
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

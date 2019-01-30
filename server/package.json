@@ -1,0 +1,26 @@
+{
+    "name": "http-mini",
+    "version": "1.0.4",
+    "description": "a simple static web server base on Express",
+    "main": "index.js",
+    "bin": {
+        "http-mini": "index.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "moshang",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/moshang-xc/web-server.git"
+    },
+    "homepage": "https://github.com/moshang-xc/web-server#readme",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "chokidar": "^2.0.3",
+        "express": "^4.16.3",
+        "node-xlsx": "^0.12.1",
+        "opn": "^5.3.0"
+    }
+}

@@ -13,8 +13,27 @@ Node + Express + Three.js
 5. 抽取完所有奖品后还可以继续抽取特别奖(例如：现在抽取红包，追加的奖品等)，此时默认一次抽取一个
 
 ## 安装
+```
 git clone https://github.com/moshang-xc/lottery.git
 
+cd lottery
+
+// 安装插件
+cd server
+npm install
+
+// 安装插件
+cd ../product 
+npm install
+
+// 打包
+npm start
+cd dist
+
+// 运行
+node ../../server/index.js 48888
+
+```
 ## 目录结构
 ```
 Lottery

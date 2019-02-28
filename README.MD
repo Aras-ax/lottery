@@ -12,6 +12,13 @@ Node + Express + Three.js
 4. 每次抽取的奖品数目可配置
 5. 抽取完所有奖品后还可以继续抽取特别奖(例如：现在抽取红包，追加的奖品等)，此时默认一次抽取一个
 
+## 预览
+![欢迎](/product/src/img/f.jpg)
+
+![欢迎](/product/src/img/s.jpg)
+
+![欢迎](/product/src/img/t.jpg)
+
 ## 安装
 ```
 git clone https://github.com/moshang-xc/lottery.git

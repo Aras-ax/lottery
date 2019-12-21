@@ -2,6 +2,8 @@
 
 年会抽奖程序，3D 球体抽奖，支持奖品信息配置，参与抽奖人员信息`Excel`导入，抽奖结果`Excel`导出
 
+> github 地址： [https://github.com/moshang-xc/lottery](https://github.com/moshang-xc/lottery)
+
 ## 技术
 
 技术：Node + Express + Three.js
@@ -20,13 +22,13 @@
 
 ## 预览
 
-![欢迎gif](/product/src/img/lottery.gif)
+![lottery.gif](https://user-gold-cdn.xitu.io/2019/12/21/16f28430af77f511?imageslim)
 
-![欢迎](/product/src/img/f.jpg)
+![f.jpg](https://user-gold-cdn.xitu.io/2019/12/21/16f28467c001de03?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
-![欢迎](/product/src/img/s.jpg)
+![s.jpg](https://user-gold-cdn.xitu.io/2019/12/21/16f28469503664c1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
-![欢迎](/product/src/img/t.jpg)
+![t.jpg](https://user-gold-cdn.xitu.io/2019/12/21/16f2846b50983782?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
 ## 安装
 

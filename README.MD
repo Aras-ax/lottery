@@ -20,6 +20,8 @@
 
 ## 预览
 
+![欢迎gif](/product/src/img/lottery.gif)
+
 ![欢迎](/product/src/img/f.jpg)
 
 ![欢迎](/product/src/img/s.jpg)

@@ -42,7 +42,7 @@ cd ../product
 npm install
 
 # 打包
-npm build
+npm run build
 
 # 运行
 npm run serve

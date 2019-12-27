@@ -212,7 +212,7 @@ function bindEvent() {
 
     let target = e.target.id;
     switch (target) {
-      // 显示Tenda墙
+      // 显示数字墙
       case "welcome":
         switchScreen("enter");
         rotate = false;

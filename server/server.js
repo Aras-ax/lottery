@@ -10,6 +10,7 @@ const {
   loadTempData,
   writeXML,
   saveDataFile,
+  shuffle,
   saveErrorDataFile
 } = require("./help");
 
@@ -108,7 +109,7 @@ router.post("/saveData", (req, res, next) => {
       });
       log(`保存奖品数据成功`);
     })
-    .catch(res => {
+    .catch(data => {
       res.json({
         type: "设置失败！"
       });
@@ -126,7 +127,7 @@ router.post("/errorData", (req, res, next) => {
       });
       log(`保存没来人员数据成功`);
     })
-    .catch(res => {
+    .catch(data => {
       res.json({
         type: "设置失败！"
       });
@@ -138,9 +139,9 @@ router.post("/errorData", (req, res, next) => {
 router.post("/export", (req, res, next) => {
   let type = [1, 2, 3, 4, 5, defaultType],
     outData = [["工号", "姓名", "部门"]];
-  type.forEach(item => {
-    outData.push(item === defaultType ? ["特别奖"] : [`${item}等奖`]);
-    outData = outData.concat(luckyData[item] || []);
+  cfg.prizes.forEach(item => {
+    outData.push([item.text]);
+    outData = outData.concat(luckyData[item.type] || []);
   });
 
   writeXML(outData, "/抽奖结果.xlsx")
@@ -208,8 +209,10 @@ function loadData() {
 
   // curData.users = loadXML(path.join(cwd, "data/users.xlsx"));
   curData.users = loadXML(path.join(dataBath, "data/users.xlsx"));
-  // 读取已经抽取的结果
+  // 重新洗牌
+  shuffle(curData.users);
 
+  // 读取已经抽取的结果
   loadTempData()
     .then(data => {
       luckyData = data[0];

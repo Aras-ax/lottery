@@ -1,3 +1,5 @@
 #npm
 node_modules/
 dist/
+temp.json
+error.json

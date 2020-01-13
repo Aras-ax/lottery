@@ -1,7 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 const xlsx = require("node-xlsx").default;
-let cwd = process.cwd();
+let cwd = path.join(__dirname, "cache");
+
+if (!fs.existsSync(cwd)) {
+  fs.mkdirSync(cwd);
+}
 
 /**
  * 读取缓存的数据内容
@@ -64,7 +68,7 @@ function writeXML(data, name) {
   ]);
 
   return new Promise((resolve, reject) => {
-    fs.writeFile(path.join(cwd, name), buffer, err => {
+    fs.writeFile(path.join(process.cwd(), name), buffer, err => {
       if (err) {
         reject(err);
         return;
@@ -80,6 +84,10 @@ function writeXML(data, name) {
  */
 function saveDataFile(data) {
   data = JSON.stringify(data, "", 2);
+
+  if (!fs.existsSync(cwd)) {
+    fs.mkdirSync(cwd);
+  }
 
   return new Promise((resolve, reject) => {
     fs.writeFile(path.join(cwd, "temp.json"), data, err => {
@@ -99,6 +107,9 @@ function saveDataFile(data) {
  */
 function saveErrorDataFile(data) {
   data = JSON.stringify(data, "", 2);
+  if (!fs.existsSync(cwd)) {
+    fs.mkdirSync(cwd);
+  }
 
   return new Promise((resolve, reject) => {
     fs.writeFile(path.join(cwd, "error.json"), data, err => {
@@ -112,9 +123,24 @@ function saveErrorDataFile(data) {
   });
 }
 
+/**
+ * 洗牌算法
+ * @param {*} arr
+ */
+function shuffle(arr) {
+  let i = arr.length;
+  while (i) {
+    let j = Math.floor(Math.random() * i--);
+    let temp = arr[j];
+    arr[j] = arr[i];
+    arr[i] = temp;
+  }
+}
+
 module.exports = {
   loadTempData,
   loadXML,
+  shuffle,
   writeXML,
   saveDataFile,
   saveErrorDataFile

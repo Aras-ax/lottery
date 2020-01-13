@@ -7,19 +7,15 @@ let prizes;
 const DEFAULT_MESS = [
   "我是该抽中一等奖还是一等奖呢，纠结ing...",
   "听说要提前一个月吃素才能中大奖喔！",
-  "好想要无人机啊！！！",
+  "好想要一等奖啊！！！",
   "一等奖有没有人想要呢？",
   "五等奖也不错，只要自己能中奖就行",
   "祝大家新年快乐！",
   "中不中奖不重要，大家吃好喝好。",
-  "我已经有了天猫精灵了，要是再中个小度，那我该宠谁呢？",
-  "2019年，祝福大家事事顺遂。",
+  "新年，祝福大家事事顺遂。",
   "作为专业陪跑的我，我就看看你们有谁跟我一样",
-  "2019祝福大家越来越好！",
-  "2019了，有没有要生猪宝宝的？",
-  "来年再战！！！",
-  "去年UI组全员陪跑，今年是否还是如此呢？",
-  "我们UI组至少要重一个大奖吧"
+  "新的一年祝福大家越来越好！",
+  "来年再战！！！"
 ];
 
 let lastDanMuList = [];
@@ -162,12 +158,7 @@ function showPrizeList(currentPrizeIndex) {
   if (currentPrize.type === defaultType) {
     currentPrize.count === "不限制";
   }
-  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.type +
-    "等奖"}</label><label id="prizeText" class="prize-shine">${
-    currentPrize["title"]
-  }</label>，剩余<label id="prizeLeft" class="prize-shine">${
-    currentPrize["count"]
-  }</label>个</div><ul class="prize-list">`;
+  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.text}</label><label id="prizeText" class="prize-shine">${currentPrize.title}</label>，剩余<label id="prizeLeft" class="prize-shine">${currentPrize.count}</label>个</div><ul class="prize-list">`;
   prizes.forEach(item => {
     if (item.type === defaultType) {
       return true;
@@ -179,7 +170,7 @@ function showPrizeList(currentPrizeIndex) {
                             <img src="${item.img}" alt="${item.title}">
                         </div>
                         <div class="prize-text">
-                            <h5 class="prize-title">${item.type}等奖 ${
+                            <h5 class="prize-title">${item.text} ${
       item.title
     }</h5>
                             <div class="prize-count">
@@ -248,7 +239,7 @@ let setPrizeData = (function() {
       lastBox.classList.remove("shine");
       lastBox.classList.add("done");
       elements.box && elements.box.classList.add("shine");
-      prizeElement.prizeType.textContent = currentPrize.type + "等奖";
+      prizeElement.prizeType.textContent = currentPrize.text;
       prizeElement.prizeText.textContent = currentPrize.title;
 
       lasetPrizeIndex = currentPrizeIndex;

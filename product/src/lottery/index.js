@@ -23,7 +23,7 @@ let TOTAL_CARDS,
   ROW_COUNT = 7,
   COLUMN_COUNT = 17,
   COMPANY,
-  HIGHLIGHT_CELL,
+  HIGHLIGHT_CELL = [],
   // 当前的比例
   Resolution = 1;
 
@@ -46,7 +46,7 @@ let selectedCardIndex = [],
     leftUsers: [] //未中奖人员
   },
   interval,
-  // 当前抽的奖项，从五等奖开始抽
+  // 当前抽的奖项，从最低奖开始抽，直到抽到大奖
   currentPrizeIndex,
   currentPrize,
   // 正在抽奖
@@ -450,11 +450,44 @@ function render() {
 function selectCard(duration = 600) {
   rotate = false;
   let width = 140,
-    tag = -(currentLuckys.length - 1) / 2;
+    tag = -(currentLuckys.length - 1) / 2,
+    locates = [];
+
+  // 计算位置信息, 大于5个分两排显示
+  if (currentLuckys.length > 5) {
+    let yPosition = [-87, 87],
+      l = selectedCardIndex.length,
+      mid = Math.ceil(l / 2);
+    tag = -(mid - 1) / 2;
+    for (let i = 0; i < mid; i++) {
+      locates.push({
+        x: tag * width * Resolution,
+        y: yPosition[0] * Resolution
+      });
+      tag++;
+    }
+
+    tag = -(l - mid - 1) / 2;
+    for (let i = mid; i < l; i++) {
+      locates.push({
+        x: tag * width * Resolution,
+        y: yPosition[1] * Resolution
+      });
+      tag++;
+    }
+  } else {
+    for (let i = selectedCardIndex.length; i > 0; i--) {
+      locates.push({
+        x: tag * width * Resolution,
+        y: 0 * Resolution
+      });
+      tag++;
+    }
+  }
 
   let text = currentLuckys.map(item => item[1]);
   addQipao(
-    `恭喜${text.join("、")}获得${currentPrize.title}, 2019年必定旺旺旺。`
+    `恭喜${text.join("、")}获得${currentPrize.title}, 新的一年必定旺旺旺。`
   );
 
   selectedCardIndex.forEach((cardIndex, index) => {
@@ -463,8 +496,8 @@ function selectCard(duration = 600) {
     new TWEEN.Tween(object.position)
       .to(
         {
-          x: tag * width * Resolution,
-          y: 50 * Resolution,
+          x: locates[index].x,
+          y: locates[index].y * Resolution,
           z: 2200
         },
         Math.random() * duration + duration
@@ -655,9 +688,9 @@ function shine(cardIndex, color) {
  * 随机切换背景和人员信息
  */
 function shineCard() {
-  let maxCard = 15,
+  let maxCard = 10,
     maxUser;
-  let shineCard = random(maxCard);
+  let shineCard = 10 + random(maxCard);
 
   setInterval(() => {
     // 正在抽奖停止闪烁

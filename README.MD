@@ -2,6 +2,8 @@
 
 年会抽奖程序，3D 球体抽奖，支持奖品信息配置，参与抽奖人员信息`Excel`导入，抽奖结果`Excel`导出
 
+**如果该程序对你有帮助，希望给个star喔(✺ω✺)。**
+
 > github 地址： [https://github.com/moshang-xc/lottery](https://github.com/moshang-xc/lottery)
 
 ## 技术

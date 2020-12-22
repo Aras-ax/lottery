@@ -351,26 +351,7 @@ button:active {
   transform: scale(1.2);
   transform-origin: left center;
   position: relative;
-}
-
-.shine:before,
-.shine:after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  box-sizing: border-box;
-  content: "";
-  z-index: 1;
-  margin: 0;
-  box-shadow: inset 0 0 0 1px;
-  border-radius: 4px;
-  animation: clipMe 8s linear infinite;
-}
-
-.shine:before {
-  animation-delay: -4s;
+    overflow: hidden;
 }
 
 .done {
@@ -388,24 +369,91 @@ button:active {
   cursor: not-allowed;
 }
 
-@keyframes clipMe {
-  0%,
-  100% {
-    clip: rect(0, 30vh, 1px, 0);
+
+.shine span {
+  position: absolute;
+  display: block
+}
+
+.shine span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg,transparent,#03e9f4);
+  animation: animate1 1s linear infinite
+}
+
+@keyframes animate1 {
+  0% {
+      left: -100%
   }
 
-  25% {
-    clip: rect(0, 1px, 10vh, 0);
-  }
-
-  50% {
-    clip: rect(9.9vh, 30vh, 10vh, 0);
-  }
-
-  75% {
-    clip: rect(0, 30vh, 10vh, 29.9vh);
+  50%,100% {
+      left: 100%
   }
 }
+
+.shine span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg,transparent,#03e9f4);
+  animation: animate2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes animate2 {
+  0% {
+      top: -100%
+  }
+
+  50%,100% {
+      top: 100%
+  }
+}
+
+.shine span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg,transparent,#03e9f4);
+  animation: animate3 1s linear infinite;
+  animation-delay: .50s
+}
+
+@keyframes animate3 {
+  0% {
+      right: -100%
+  }
+
+  50%,100% {
+      right: 100%
+  }
+}
+
+.shine span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg,transparent,#03e9f4);
+  animation: animate4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes animate4 {
+  0% {
+      bottom: -100%
+  }
+
+  50%,100% {
+      bottom: 100%
+  }
+}
+
 
 .shine.prize-item {
   /* width: 24vh; */

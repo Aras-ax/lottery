@@ -131,7 +131,7 @@ class Qipao {
 
 let addQipao = (() => {
   let qipaoList = [];
-  return function(text) {
+  return function (text) {
     let qipao;
     if (qipaoList.length > 0) {
       qipao = qipaoList.shift();
@@ -166,6 +166,7 @@ function showPrizeList(currentPrizeIndex) {
     htmlCode += `<li id="prize-item-${item.type}" class="prize-item ${
       item.type == currentPrize.type ? "shine" : ""
     }">
+                        <span></span><span></span><span></span><span></span>
                         <div class="prize-img">
                             <img src="${item.img}" alt="${item.title}">
                         </div>
@@ -200,8 +201,8 @@ function resetPrize(currentPrizeIndex) {
   showPrizeList(currentPrizeIndex);
 }
 
-let setPrizeData = (function() {
-  return function(currentPrizeIndex, count, isInit) {
+let setPrizeData = (function () {
+  return function (currentPrizeIndex, count, isInit) {
     let currentPrize = prizes[currentPrizeIndex],
       type = currentPrize.type,
       elements = prizeElement[type],
@@ -253,6 +254,7 @@ let setPrizeData = (function() {
     }
 
     count = totalCount - count;
+    count = count < 0 ? 0 : count;
     let percent = (count / totalCount).toFixed(2);
     elements.bar && (elements.bar.style.width = percent * 100 + "%");
     elements.text && (elements.text.textContent = count + "/" + totalCount);
@@ -284,7 +286,7 @@ function startMaoPao() {
       danmuList.push(
         new DanMu({
           text: DEFAULT_MESS[index++],
-          onComplete: function() {
+          onComplete: function () {
             setTimeout(() => {
               this.start(DEFAULT_MESS[index++]);
               index = index > len ? 0 : index;

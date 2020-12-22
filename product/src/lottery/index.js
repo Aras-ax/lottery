@@ -202,7 +202,7 @@ function setLotteryStatus(status = false) {
  * 事件绑定
  */
 function bindEvent() {
-  document.querySelector("#menu").addEventListener("click", function(e) {
+  document.querySelector("#menu").addEventListener("click", function (e) {
     e.stopPropagation();
     // 如果正在抽奖，则禁止一切操作
     if (isLotting) {
@@ -593,7 +593,9 @@ function lottery() {
     selectedCardIndex = [];
     // 当前同时抽取的数目,当前奖品抽完还可以继续抽，但是不记录数据
     let perCount = EACH_COUNT[currentPrizeIndex],
-      leftCount = basicData.leftUsers.length;
+      luckyData = basicData.luckyUsers[currentPrize.type],
+      leftCount = basicData.leftUsers.length,
+      leftPrizeCount = currentPrize.count - (luckyData ? luckyData.length : 0);
 
     if (leftCount === 0) {
       addQipao("人员已抽完，现在重新设置所有人员可以进行二次抽奖！");
@@ -605,12 +607,17 @@ function lottery() {
       let luckyId = random(leftCount);
       currentLuckys.push(basicData.leftUsers.splice(luckyId, 1)[0]);
       leftCount--;
+      leftPrizeCount--;
 
       let cardIndex = random(TOTAL_CARDS);
       while (selectedCardIndex.includes(cardIndex)) {
         cardIndex = random(TOTAL_CARDS);
       }
       selectedCardIndex.push(cardIndex);
+
+      if (leftPrizeCount === 0) {
+        break;
+      }
     }
 
     // console.log(currentLuckys);
@@ -787,7 +794,7 @@ function createHighlight() {
 
 let onload = window.onload;
 
-window.onload = function() {
+window.onload = function () {
   onload && onload();
 
   let music = document.querySelector("#music");
@@ -797,7 +804,7 @@ window.onload = function() {
     musicBox = document.querySelector("#musicBox");
 
   function animate() {
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       if (stopAnimate) {
         return;
       }
@@ -810,7 +817,7 @@ window.onload = function() {
 
   musicBox.addEventListener(
     "click",
-    function(e) {
+    function (e) {
       if (music.paused) {
         music.play().then(
           () => {
@@ -829,7 +836,7 @@ window.onload = function() {
     false
   );
 
-  setTimeout(function() {
+  setTimeout(function () {
     musicBox.click();
   }, 1000);
 };

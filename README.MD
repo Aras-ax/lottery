@@ -24,13 +24,13 @@
 
 ## 预览
 
-![lottery.gif](https://user-gold-cdn.xitu.io/2019/12/21/16f28430af77f511?imageslim)
+![lottery.gif](https://raw.githubusercontent.com/moshang-xc/blog/master/share/lottery.gif)
 
-![f.jpg](https://user-gold-cdn.xitu.io/2019/12/21/16f28467c001de03?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![index.jpg](https://raw.githubusercontent.com/moshang-xc/blog/master/share/index.jpg)
 
-![s.jpg](https://user-gold-cdn.xitu.io/2019/12/21/16f28469503664c1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![start.jpg](https://raw.githubusercontent.com/moshang-xc/blog/master/share/start.jpg)
 
-![t.jpg](https://user-gold-cdn.xitu.io/2019/12/21/16f2846b50983782?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![end.jpg](https://raw.githubusercontent.com/moshang-xc/blog/master/share/end.jpg)
 
 ## 安装
 

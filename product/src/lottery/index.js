@@ -10,13 +10,13 @@ import {
 } from "./prizeList";
 import { NUMBER_MATRIX } from "./config.js";
 
-const ROTATE_TIME = 3000;
+const ROTATE_TIME = 5000; // 旋转时间
 const BASE_HEIGHT = 1080;
 
 let TOTAL_CARDS,
   btns = {
-    enter: document.querySelector("#enter"),
-    lotteryBar: document.querySelector("#lotteryBar")
+    enter: document.querySelector("#enter"), // 进入抽奖
+    lotteryBar: document.querySelector("#lotteryBar") // 开始抽奖
   },
   prizes,
   EACH_COUNT,
@@ -109,7 +109,9 @@ function initAll() {
   });
 }
 
+// 初始话用户卡片信息
 function initCards() {
+  let object;
   let member = basicData.users,
     showCards = [],
     length = member.length;
@@ -129,21 +131,21 @@ function initCards() {
     1,
     10000
   );
-  camera.position.z = 3000;
+  camera.position.z = 2800;
 
   scene = new THREE.Scene();
 
   for (let i = 0; i < ROW_COUNT; i++) {
     for (let j = 0; j < COLUMN_COUNT; j++) {
       isBold = HIGHLIGHT_CELL.includes(j + "-" + i);
-      var element = createCard(
+      const element = createCard(
         member[index % length],
         isBold,
         index,
         showTable
       );
 
-      var object = new THREE.CSS3DObject(element);
+      object = new THREE.CSS3DObject(element);
       object.position.x = Math.random() * 4000 - 2000;
       object.position.y = Math.random() * 4000 - 2000;
       object.position.z = Math.random() * 4000 - 2000;
@@ -151,7 +153,7 @@ function initCards() {
       threeDCards.push(object);
       //
 
-      var object = new THREE.Object3D();
+      object = new THREE.Object3D();
       object.position.x = j * 140 - position.x;
       object.position.y = -(i * 180) + position.y;
       targets.table.push(object);
@@ -161,12 +163,12 @@ function initCards() {
 
   // sphere
 
-  var vector = new THREE.Vector3();
+  const vector = new THREE.Vector3();
 
-  for (var i = 0, l = threeDCards.length; i < l; i++) {
-    var phi = Math.acos(-1 + (2 * i) / l);
-    var theta = Math.sqrt(l * Math.PI) * phi;
-    var object = new THREE.Object3D();
+  for (let i = 0, l = threeDCards.length; i < l; i++) {
+    const phi = Math.acos(-1 + (2 * i) / l);
+    const theta = Math.sqrt(l * Math.PI) * phi;
+    object = new THREE.Object3D();
     object.position.setFromSphericalCoords(800 * Resolution, phi, theta);
     vector.copy(object.position).multiplyScalar(2);
     object.lookAt(vector);
@@ -293,7 +295,9 @@ function bindEvent() {
   window.addEventListener("resize", onWindowResize, false);
 }
 
+// 切换场景
 function switchScreen(type) {
+  console.log('switchScreen:', type);
   switch (type) {
     case "enter":
       btns.enter.classList.remove("none");
@@ -322,7 +326,7 @@ function createElement(css, text) {
  * 创建名牌
  */
 function createCard(user, isBold, id, showTable) {
-  var element = createElement();
+  const element = createElement();
   element.id = "card-" + id;
 
   if (isBold) {
@@ -361,9 +365,9 @@ function addHighlight() {
  */
 function transform(targets, duration) {
   // TWEEN.removeAll();
-  for (var i = 0; i < threeDCards.length; i++) {
-    var object = threeDCards[i];
-    var target = targets[i];
+  for (let i = 0; i < threeDCards.length; i++) {
+    const object = threeDCards[i];
+    const target = targets[i];
 
     new TWEEN.Tween(object.position)
       .to(
@@ -405,6 +409,7 @@ function transform(targets, duration) {
     .start();
 }
 
+// 转动球
 function rotateBall() {
   return new Promise((resolve, reject) => {
     scene.rotation.y = 0;
@@ -447,6 +452,7 @@ function render() {
   renderer.render(scene, camera);
 }
 
+// 显示中奖人员的卡片信息
 function selectCard(duration = 600) {
   rotate = false;
   let width = 140,
@@ -479,7 +485,7 @@ function selectCard(duration = 600) {
     for (let i = selectedCardIndex.length; i > 0; i--) {
       locates.push({
         x: tag * width * Resolution,
-        y: 0 * Resolution
+        y: 0
       });
       tag++;
     }
@@ -492,7 +498,7 @@ function selectCard(duration = 600) {
 
   selectedCardIndex.forEach((cardIndex, index) => {
     changeCard(cardIndex, currentLuckys[index]);
-    var object = threeDCards[cardIndex];
+    const object = threeDCards[cardIndex];
     new TWEEN.Tween(object.position)
       .to(
         {
@@ -656,6 +662,7 @@ function saveData() {
   return Promise.resolve();
 }
 
+// 更新剩余抽奖数目的数据显示
 function changePrize() {
   let luckys = basicData.luckyUsers[currentPrize.type];
   let luckyCount = (luckys ? luckys.length : 0) + EACH_COUNT[currentPrizeIndex];

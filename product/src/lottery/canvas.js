@@ -3,20 +3,20 @@
   window.requestAnimFrame = (function() {
     return window.requestAnimationFrame;
   })();
-  var canvas = document.getElementById("canvas");
-  var c = canvas.getContext("2d");
+  const canvas = document.getElementById("canvas");
+  const c = canvas.getContext("2d");
 
-  var numStars = 1500;
-  var radius = "0." + Math.floor(Math.random() * 9) + 1;
-  var focalLength = canvas.width * 2;
-  var warp = 0;
-  var centerX, centerY;
+  const numStars = 1500;
+  const radius = "0." + Math.floor(Math.random() * 9) + 1;
+  const focalLength = canvas.width * 2;
+  const warp = 0;
+  let centerX, centerY;
 
-  var stars = [],
+  let stars = [],
     star;
-  var i;
+  let i;
 
-  var animate = true;
+  const animate = true;
 
   initializeStars();
 
@@ -54,18 +54,18 @@
   }
 
   function drawStars() {
-    var pixelX, pixelY, pixelRadius;
+    let pixelX, pixelY, pixelRadius;
 
     // Resize to the screen
     if (
-      canvas.width != window.innerWidth ||
-      canvas.width != window.innerWidth
+      canvas.width !== window.innerWidth ||
+      canvas.width !== window.innerWidth
     ) {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       initializeStars();
     }
-    if (warp == 0) {
+    if (warp === 0) {
       c.fillStyle = "rgba(0,10,20,1)";
       c.fillRect(0, 0, canvas.width, canvas.height);
     }
@@ -77,7 +77,7 @@
       pixelX += centerX;
       pixelY = (star.y - centerY) * (focalLength / star.z);
       pixelY += centerY;
-      pixelRadius = 1 * (focalLength / star.z);
+      pixelRadius = (focalLength / star.z);
 
       c.fillRect(pixelX, pixelY, pixelRadius, pixelRadius);
       c.fillStyle = "rgba(209, 255, 255, " + star.o + ")";

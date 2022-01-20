@@ -10,6 +10,8 @@
 
 技术：Node + Express + Three.js
 
+webpack: 已经更新到 🎉 [webpack5](https://webpack.docschina.org/) 🎉
+
 后台通过`Express`实现
 
 前端抽奖界面通过`Three.js`实现 3D 抽奖球，引用了`Three.js`的官方 3D 示例
@@ -41,20 +43,20 @@ cd lottery
 
 # 服务端插件安装
 cd server
-npm install
+yarn
 
 # 前端插件安装
 cd ../product
-npm install
+yarn
 
 # 打包
-npm run build
+yarn build
 
 # 运行
-npm run serve
+yarn start
 
 # 开发调试
-npm run dev
+yarn dev
 
 ```
 

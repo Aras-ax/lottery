@@ -104,11 +104,12 @@ button {
   background: transparent;
   outline: 1px solid rgba(127, 255, 255, 0.75);
   border: 0;
-  padding: 1.6vh 4vh;
+  padding: 1.2vh 3.5vh;
   margin: 0 4.6vh;
-  font-size: 2vh;
+  font-size: 1.8vh;
   font-weight: bold;
   cursor: pointer;
+  border-radius: 6px;
 }
 
 button:hover {
@@ -247,7 +248,7 @@ button:active {
   border-radius: 1.8vh;
   position: relative;
   animation: animate-positive 2s;
-  background-color: #d9534f;
+  background-color: rgba(253, 105, 0, 0.95);
   height: 1.8vh;
   -webkit-transition: width 0.6s ease;
   -o-transition: width 0.6s ease;
@@ -463,14 +464,14 @@ button:active {
 .prize-mess {
   color: #fff;
   line-height: 5vh;
-  font-size: 1.6vh;
-  margin: 2.4vh 0;
+  font-size: 2vh;
+  margin: 2.4vh 0 4.8vh;
 }
 
 .prize-shine {
   font-size: 5vh;
   font-weight: bold;
-  color: #db5c58;
+  color: rgba(253, 105, 0, 0.95);
   vertical-align: middle;
   padding: 0 6px;
 }

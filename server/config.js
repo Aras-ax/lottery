@@ -11,7 +11,7 @@ const prizes = [
     type: 0,
     count: 1000,
     title: "",
-    text: "特别奖"
+    text: "领导特别奖"
   },
   {
     type: 1,
@@ -43,21 +43,21 @@ const prizes = [
   },
   {
     type: 5,
-    count: 8,
+    count: 10,
     text: "四等奖",
     title: "大疆无人机",
     img: "../img/spark.jpg"
   },
   {
     type: 6,
-    count: 8,
+    count: 12,
     text: "五等奖",
     title: "Kindle",
     img: "../img/kindle.jpg"
   },
   {
     type: 7,
-    count: 11,
+    count: 16,
     text: "六等奖",
     title: "漫步者蓝牙耳机",
     img: "../img/edifier.jpg"
@@ -67,12 +67,12 @@ const prizes = [
 /**
  * 一次抽取的奖品个数与prizes对应
  */
-const EACH_COUNT = [1, 1, 5, 6, 7, 8, 9, 10];
+const EACH_COUNT = [5, 1, 5, 6, 7, 5, 6, 8];
 
 /**
  * 卡片公司名称标识
  */
-const COMPANY = "MoShang";
+const COMPANY = "凯桥信息";
 
 module.exports = {
   prizes,

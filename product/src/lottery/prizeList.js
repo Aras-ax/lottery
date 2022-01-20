@@ -22,6 +22,7 @@ let lastDanMuList = [];
 
 let prizeElement = {},
   lasetPrizeIndex = 0;
+
 class DanMu {
   constructor(option) {
     if (typeof option !== "object") {
@@ -156,15 +157,15 @@ function setPrizes(pri) {
 function showPrizeList(currentPrizeIndex) {
   let currentPrize = prizes[currentPrizeIndex];
   if (currentPrize.type === defaultType) {
-    currentPrize.count === "不限制";
+    currentPrize.count = "不限制";
   }
-  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.text}</label><label id="prizeText" class="prize-shine">${currentPrize.title}</label>，剩余<label id="prizeLeft" class="prize-shine">${currentPrize.count}</label>个</div><ul class="prize-list">`;
+  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">[ ${currentPrize.text} ]</label><label id="prizeText" class="prize-shine">${currentPrize.title}</label>，剩余 <label id="prizeLeft" class="prize-shine">${currentPrize.count}</label> 个</div><ul class="prize-list">`;
   prizes.forEach(item => {
     if (item.type === defaultType) {
       return true;
     }
     htmlCode += `<li id="prize-item-${item.type}" class="prize-item ${
-      item.type == currentPrize.type ? "shine" : ""
+      item.type === currentPrize.type ? "shine" : ""
     }">
                         <span></span><span></span><span></span><span></span>
                         <div class="prize-img">
@@ -177,13 +178,13 @@ function showPrizeList(currentPrizeIndex) {
                             <div class="prize-count">
                                 <div class="progress">
                                     <div id="prize-bar-${
-                                      item.type
-                                    }" class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 100%;">
+      item.type
+    }" class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 100%;">
                                     </div>
                                 </div>
                                 <div id="prize-count-${
-                                  item.type
-                                }" class="prize-count-left">
+      item.type
+    }" class="prize-count-left">
                                     ${item.count + "/" + item.count}
                                 </div>
                             </div>
@@ -201,6 +202,7 @@ function resetPrize(currentPrizeIndex) {
   showPrizeList(currentPrizeIndex);
 }
 
+// 设置奖品信息
 let setPrizeData = (function () {
   return function (currentPrizeIndex, count, isInit) {
     let currentPrize = prizes[currentPrizeIndex],
@@ -247,7 +249,7 @@ let setPrizeData = (function () {
     }
 
     if (currentPrizeIndex === 0) {
-      prizeElement.prizeType.textContent = "特别奖";
+      prizeElement.prizeType.textContent = "领导特别奖";
       prizeElement.prizeText.textContent = " ";
       prizeElement.prizeLeft.textContent = "不限制";
       return;

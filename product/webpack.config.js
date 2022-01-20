@@ -53,23 +53,23 @@ module.exports = {
       hash: true,
       inject: true
     }),
-    new CopyWebpackPlugin([
-      {
-        from: "./src/css",
-        to: "./css"
-      },
-      {
-        from: "./src/data",
-        to: "./data"
-      },
-      {
-        from: "./src/img",
-        to: "./img"
-      },
-      {
-        from: "./src/lib",
-        to: "./lib"
-      }
-    ])
+    new CopyWebpackPlugin({ patterns: [
+        {
+          from: "./src/css",
+          to: "./css"
+        },
+        {
+          from: "./src/data",
+          to: "./data"
+        },
+        {
+          from: "./src/img",
+          to: "./img"
+        },
+        {
+          from: "./src/lib",
+          to: "./lib"
+        }
+      ]})
   ]
 };

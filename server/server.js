@@ -215,6 +215,7 @@ function loadData() {
   // 读取已经抽取的结果
   loadTempData()
     .then(data => {
+      console.log('data', data)
       luckyData = data[0];
       errorData = data[1];
     })

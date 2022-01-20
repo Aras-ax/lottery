@@ -110,7 +110,7 @@ function initAll() {
 }
 
 function initCards() {
-  let member = basicData.users,
+  let member = basicData.users.slice(),
     showCards = [],
     length = member.length;
 
@@ -597,9 +597,9 @@ function lottery() {
       leftCount = basicData.leftUsers.length,
       leftPrizeCount = currentPrize.count - (luckyData ? luckyData.length : 0);
 
-    if (leftCount === 0) {
-      addQipao("人员已抽完，现在重新设置所有人员可以进行二次抽奖！");
-      basicData.leftUsers = basicData.users;
+    if (leftCount < perCount) {
+      addQipao("剩余参与抽奖人员不足，现在重新设置所有人员可以进行二次抽奖！");
+      basicData.leftUsers = basicData.users.slice();
       leftCount = basicData.leftUsers.length;
     }
 

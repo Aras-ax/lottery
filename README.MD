@@ -149,5 +149,6 @@ const EACH_COUNT = [1, 1, 5];
 ```js
 const COMPANY = "MoShang";
 ```
+
 ## License
 MIT

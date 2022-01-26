@@ -24,7 +24,7 @@ let TOTAL_CARDS,
   COLUMN_COUNT = 17,
   COMPANY,
   HIGHLIGHT_CELL = [],
-  // 当前的比例
+  // 当前的比例(球形大小)
   Resolution = 1;
 
 let camera,
@@ -62,6 +62,7 @@ function initAll() {
   window.AJAX({
     url: "/getTempData",
     success(data) {
+      console.log('data', data);
       // 获取基础数据
       prizes = data.cfgData.prizes;
       EACH_COUNT = data.cfgData.EACH_COUNT;
@@ -491,40 +492,43 @@ function selectCard(duration = 600) {
     }
   }
 
-  let text = currentLuckys.map(item => item[1]);
+  console.log('currentLuckys:',currentLuckys);
+  let text = currentLuckys.filter(x=> x !== undefined).map(item => item[1]);
   addQipao(
     `恭喜${text.join("、")}获得${currentPrize.title}, 新的一年必定旺旺旺。`
   );
 
   selectedCardIndex.forEach((cardIndex, index) => {
-    changeCard(cardIndex, currentLuckys[index]);
-    const object = threeDCards[cardIndex];
-    new TWEEN.Tween(object.position)
-      .to(
-        {
-          x: locates[index].x,
-          y: locates[index].y * Resolution,
-          z: 2200
-        },
-        Math.random() * duration + duration
-      )
-      .easing(TWEEN.Easing.Exponential.InOut)
-      .start();
+    if(currentLuckys[index]){
+      changeCard(cardIndex, currentLuckys[index]);
+      const object = threeDCards[cardIndex];
+      new TWEEN.Tween(object.position)
+        .to(
+          {
+            x: locates[index].x,
+            y: locates[index].y * Resolution,
+            z: 2200
+          },
+          Math.random() * duration + duration
+        )
+        .easing(TWEEN.Easing.Exponential.InOut)
+        .start();
 
-    new TWEEN.Tween(object.rotation)
-      .to(
-        {
-          x: 0,
-          y: 0,
-          z: 0
-        },
-        Math.random() * duration + duration
-      )
-      .easing(TWEEN.Easing.Exponential.InOut)
-      .start();
+      new TWEEN.Tween(object.rotation)
+        .to(
+          {
+            x: 0,
+            y: 0,
+            z: 0
+          },
+          Math.random() * duration + duration
+        )
+        .easing(TWEEN.Easing.Exponential.InOut)
+        .start();
 
-    object.element.classList.add("prize");
-    tag++;
+      object.element.classList.add("prize");
+      tag++;
+    }
   });
 
   new TWEEN.Tween(this)
@@ -603,11 +607,14 @@ function lottery() {
       leftCount = basicData.leftUsers.length,
       leftPrizeCount = currentPrize.count - (luckyData ? luckyData.length : 0);
 
+    console.log('leftCount:', leftCount);
     if (leftCount === 0) {
       addQipao("人员已抽完，现在重新设置所有人员可以进行二次抽奖！");
       basicData.leftUsers = basicData.users;
       leftCount = basicData.leftUsers.length;
     }
+
+    console.log('leftCount - 1:', leftCount);
 
     for (let i = 0; i < perCount; i++) {
       let luckyId = random(leftCount);

@@ -11,12 +11,14 @@ import {
 import { NUMBER_MATRIX } from "./config.js";
 
 const ROTATE_TIME = 3000;
+const ROTATE_LOOP = 1000;
 const BASE_HEIGHT = 1080;
 
 let TOTAL_CARDS,
   btns = {
     enter: document.querySelector("#enter"),
-    lotteryBar: document.querySelector("#lotteryBar")
+    lotteryBar: document.querySelector("#lotteryBar"),
+    lottery: document.querySelector("#lottery")
   },
   prizes,
   EACH_COUNT,
@@ -36,6 +38,8 @@ let camera,
     table: [],
     sphere: []
   };
+
+let rotateObj;
 
 let selectedCardIndex = [],
   rotate = false,
@@ -206,7 +210,12 @@ function bindEvent() {
     e.stopPropagation();
     // 如果正在抽奖，则禁止一切操作
     if (isLotting) {
-      addQipao("抽慢一点点～～");
+      if (e.target.id === "lottery") {
+        rotateObj.stop();
+        btns.lottery.innerHTML = "开始抽奖";
+      } else {
+        addQipao("抽慢一点点～～");
+      }
       return false;
     }
 
@@ -389,14 +398,6 @@ function transform(targets, duration) {
       .easing(TWEEN.Easing.Exponential.InOut)
       .start();
 
-    // new TWEEN.Tween(object.rotation)
-    //     .to({
-    //         x: target.rotation.x,
-    //         y: target.rotation.y,
-    //         z: target.rotation.z
-    //     }, Math.random() * duration + duration)
-    //     .easing(TWEEN.Easing.Exponential.InOut)
-    //     .start();
   }
 
   new TWEEN.Tween(this)
@@ -405,19 +406,43 @@ function transform(targets, duration) {
     .start();
 }
 
+// function rotateBall() {
+//   return new Promise((resolve, reject) => {
+//     scene.rotation.y = 0;
+//     new TWEEN.Tween(scene.rotation)
+//       .to(
+//         {
+//           y: Math.PI * 8
+//         },
+//         ROTATE_TIME
+//       )
+//       .onUpdate(render)
+//       .easing(TWEEN.Easing.Exponential.InOut)
+//       .start()
+//       .onComplete(() => {
+//         resolve();
+//       });
+//   });
+// }
+
 function rotateBall() {
   return new Promise((resolve, reject) => {
     scene.rotation.y = 0;
-    new TWEEN.Tween(scene.rotation)
+    rotateObj = new TWEEN.Tween(scene.rotation);
+    rotateObj
       .to(
         {
-          y: Math.PI * 8
+          y: Math.PI * 6 * ROTATE_LOOP
         },
-        ROTATE_TIME
+        ROTATE_TIME * ROTATE_LOOP
       )
       .onUpdate(render)
-      .easing(TWEEN.Easing.Exponential.InOut)
+      // .easing(TWEEN.Easing.Linear)
       .start()
+      .onStop(() => {
+        scene.rotation.y = 0;
+        resolve();
+      })
       .onComplete(() => {
         resolve();
       });
@@ -587,6 +612,12 @@ function resetCard(duration = 500) {
  * 抽奖
  */
 function lottery() {
+  // if (isLotting) {
+  //   rotateObj.stop();
+  //   btns.lottery.innerHTML = "开始抽奖";
+  //   return;
+  // }
+  btns.lottery.innerHTML = "结束抽奖";
   rotateBall().then(() => {
     // 将之前的记录置空
     currentLuckys = [];
@@ -679,7 +710,7 @@ function changeCard(cardIndex, user) {
 
   card.innerHTML = `<div class="company">${COMPANY}</div><div class="name">${
     user[1]
-  }</div><div class="details">${user[0]}<br/>${user[2] || "PSST"}</div>`;
+  }</div><div class="details">${user[0] || ''}<br/>${user[2] || "PSST"}</div>`;
 }
 
 /**

@@ -1,12 +1,22 @@
-(function() {
+(function () {
   //based on an Example by @curran
-  window.requestAnimFrame = (function() {
+  window.requestAnimFrame = (function () {
     return window.requestAnimationFrame;
   })();
   var canvas = document.getElementById("canvas");
+
+  ~~(function setSize() {
+    //定义canvas的宽高，让他跟浏览器的窗口的宽高相同
+    window.onresize = arguments.callee;
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+  })();
+
   var c = canvas.getContext("2d");
 
-  var numStars = 1500;
+  var numStars = 800;
   var radius = "0." + Math.floor(Math.random() * 9) + 1;
   var focalLength = canvas.width * 2;
   var warp = 0;

@@ -41,4 +41,6 @@ tar -czvf lottery.tar.gz lottery/
 
    http://127.0.0.1:28888
 
- 
+5.  我的打包镜像已经上传到docker, 如下
+   https://hub.docker.com/r/yiliangjianghu/luckygame
+   docker pull yiliangjianghu/luckygame

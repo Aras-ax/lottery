@@ -4,7 +4,7 @@
 
 如果该程序对你有帮助😎😎😎，希望给个⭐**star**⭐喔。😘😘😘😍🥰🎉🎈🎃
 
-> github 地址： [https://github.com/moshang-xc/lottery](https://github.com/moshang-xc/lottery)
+> 立即体验一下： [https://moshang-xc.github.io/lottery/](https://moshang-xc.github.io/lottery/)
 
 ## 技术
 

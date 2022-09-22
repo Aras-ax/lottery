@@ -64,7 +64,8 @@ initAll();
  */
 function initAll() {
   window.AJAX({
-    url: "/getTempData",
+    url: "./data/getTempData.json",
+    type: 'get',
     success(data) {
       // 获取基础数据
       prizes = data.cfgData.prizes;
@@ -101,7 +102,8 @@ function initAll() {
   });
 
   window.AJAX({
-    url: "/getUsers",
+    url: "./data/getUsers.json",
+    type: 'get',
     success(data) {
       basicData.users = data;
 
@@ -214,7 +216,7 @@ function bindEvent() {
         rotateObj.stop();
         btns.lottery.innerHTML = "开始抽奖";
       } else {
-        addQipao("抽慢一点点～～");
+        addQipao("正在抽奖中，抽慢一点点～～");
       }
       return false;
     }
@@ -397,7 +399,6 @@ function transform(targets, duration) {
       )
       .easing(TWEEN.Easing.Exponential.InOut)
       .start();
-
   }
 
   new TWEEN.Tween(this)
@@ -710,7 +711,7 @@ function changeCard(cardIndex, user) {
 
   card.innerHTML = `<div class="company">${COMPANY}</div><div class="name">${
     user[1]
-  }</div><div class="details">${user[0] || ''}<br/>${user[2] || "PSST"}</div>`;
+  }</div><div class="details">${user[0] || ""}<br/>${user[2] || "MS"}</div>`;
 }
 
 /**
@@ -750,58 +751,62 @@ function shineCard() {
 }
 
 function setData(type, data) {
-  return new Promise((resolve, reject) => {
-    window.AJAX({
-      url: "/saveData",
-      data: {
-        type,
-        data
-      },
-      success() {
-        resolve();
-      },
-      error() {
-        reject();
-      }
-    });
+  return new Promise(resolve => {
+    // window.AJAX({
+    //   url: "/saveData",
+    //   data: {
+    //     type,
+    //     data
+    //   },
+    //   success() {
+    //     resolve();
+    //   },
+    //   error() {
+    //     reject();
+    //   }
+    // });
+    setTimeout(resolve, 500);
   });
 }
 
 function setErrorData(data) {
-  return new Promise((resolve, reject) => {
-    window.AJAX({
-      url: "/errorData",
-      data: {
-        data
-      },
-      success() {
-        resolve();
-      },
-      error() {
-        reject();
-      }
-    });
+  return new Promise(resolve => {
+    // window.AJAX({
+    //   url: "/errorData",
+    //   data: {
+    //     data
+    //   },
+    //   success() {
+    //     resolve();
+    //   },
+    //   error() {
+    //     reject();
+    //   }
+    // });
+    setTimeout(resolve, 500);
   });
 }
 
 function exportData() {
-  window.AJAX({
-    url: "/export",
-    success(data) {
-      if (data.type === "success") {
-        location.href = data.url;
-      }
-    }
-  });
+  // window.AJAX({
+  //   url: "/export",
+  //   success(data) {
+  //     if (data.type === "success") {
+  //       location.href = data.url;
+  //     }
+  //   }
+  // });
+  window.location.href = "./data/抽奖结果.xlsx";
 }
 
 function reset() {
-  window.AJAX({
-    url: "/reset",
-    success(data) {
-      console.log("重置成功");
-    }
-  });
+  // window.AJAX({
+  //   url: "/reset",
+  //   success(data) {
+  //     console.log("重置成功");
+  //   }
+  // });
+  console.log("重置成功");
 }
 
 function createHighlight() {

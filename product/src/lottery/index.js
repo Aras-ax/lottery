@@ -214,7 +214,7 @@ function bindEvent() {
         rotateObj.stop();
         btns.lottery.innerHTML = "开始抽奖";
       } else {
-        addQipao("抽慢一点点～～");
+        addQipao("正在抽奖，抽慢一点点～～");
       }
       return false;
     }
@@ -397,7 +397,6 @@ function transform(targets, duration) {
       )
       .easing(TWEEN.Easing.Exponential.InOut)
       .start();
-
   }
 
   new TWEEN.Tween(this)
@@ -710,7 +709,7 @@ function changeCard(cardIndex, user) {
 
   card.innerHTML = `<div class="company">${COMPANY}</div><div class="name">${
     user[1]
-  }</div><div class="details">${user[0] || ''}<br/>${user[2] || "PSST"}</div>`;
+  }</div><div class="details">${user[0] || ""}<br/>${user[2] || "PSST"}</div>`;
 }
 
 /**

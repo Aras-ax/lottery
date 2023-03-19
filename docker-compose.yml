@@ -1,0 +1,15 @@
+version: '3.8'
+
+volumes:
+  lottery_log:
+services:
+  lottery:
+    container_name: lottery
+    expose:
+      - 28458
+    ports:
+      - "28458:8888"
+    volumes:
+      - "lottery_log:/var/log"
+    image: "panda1024/lottery:v0.3"
+    restart: always

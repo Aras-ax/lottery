@@ -147,5 +147,89 @@ const EACH_COUNT = [1, 1, 5];
 ```js
 const COMPANY = "MoShang";
 ```
+
+
+## Docker部署方案
+
+### 概述
+
+该项目现在支持使用Docker进行部署。Docker是一个轻量级的容器化平台，可以让您快速地部署、测试和运行应用程序。本文档将向您介绍如何使用Docker部署该项目。
+
+### 系统要求
+
+在您开始使用Docker部署该项目之前，您需要确保已经安装了以下软件：
+
+- Docker（请参阅Docker的官方文档以获取安装说明）
+- Docker Compose
+
+### 安装
+
+1. 下载并解压该项目的源代码。
+
+2. 进入解压后的项目目录。
+
+3. 执行以下命令以构建Docker镜像：
+
+   ```
+   ./build.sh [TAG]
+   ```
+
+   这将使用Dockerfile构建一个名为`lottery:[TAG]`的Docker镜像。如果未指定标签，则默认使用`latest`标签。
+
+4. 执行以下命令以在本地运行容器：
+
+   ```
+   ./dev.sh [TAG]
+   ```
+
+   这将启动容器并将应用程序部署在Docker容器中。您可以在本地进行测试，确保一切正常。请注意，容器内部的应用程序将会监听8888端口和443端口。
+
+5. 执行以下命令以将Docker镜像标记并推送到远程Docker仓库：
+
+   ```
+   ./tagpush.sh [TAG]
+   ```
+
+   这将为Docker镜像打上标签并将其推送到远程Docker仓库，如果要使用docker官方的hub请先在https://hub.docker.com/新建自己的repo，然后将文件中的用户名改为自己。请注意，`[TAG]`应替换为您要使用的标签名称。
+
+6. 确保有一个名为`docker-compose.yml`的文件，并添加以下内容：
+
+   ```
+   version: '3.8'
+   
+   volumes:
+     lottery_log:
+   
+   services:
+     lottery:
+       container_name: lottery
+       expose:
+         - 8888
+       ports:
+         - "28458:8888"
+         - "443:443"
+       volumes:
+         - "lottery_log:/var/log"
+       image: "panda1024/lottery:[TAG]" 
+       restart: always
+   ```
+
+   请注意，`[TAG]`应替换为您推送到Docker仓库的镜像名称。
+
+7. 在服务器上的项目目录中运行以下命令以使用Docker Compose部署应用程序：
+
+```
+	docker-compose up -d
+```
+
+​		这将启动一个Docker Compose堆栈，并将该项目部署在其中。请注意，此处将容器的8888端口和443端口映射		到了服务器上的8888端口和443端口。如果您希望使用其他端口，请相应地更改`docker-compose.yml`文件。
+
+### 总结
+
+通过本文档，您了解了如何使用Docker部署该项目。如果您有任何疑问或建议，请随时与此文档作者联系  https://github.com/JessyTsu1。
+
+
+
 ## License
+
 MIT

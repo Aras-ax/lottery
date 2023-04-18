@@ -224,10 +224,6 @@ const COMPANY = "MoShang";
 
 ​		这将启动一个Docker Compose堆栈，并将该项目部署在其中。请注意，此处将容器的8888端口和443端口映射		到了服务器上的8888端口和443端口。如果您希望使用其他端口，请相应地更改`docker-compose.yml`文件。
 
-### 总结
-
-通过本文档，您了解了如何使用Docker部署该项目。如果您有任何疑问或建议，请随时与此文档作者联系  https://github.com/JessyTsu1。
-
 
 
 ## License

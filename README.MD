@@ -1,28 +1,32 @@
-# 抽奖程序
+# Lottery program
 
-年会抽奖程序，3D 球体抽奖，支持奖品信息配置，参与抽奖人员信息`Excel`导入，抽奖结果`Excel`导出
+Annual dinner lottery program, 3D sphere raffle, support for configuration of prize information, import participants information by `Excel`, and export lottery results by `Excel`
+If programm is helpful for you😎😎😎, it will be greatful to comment us with⭐**star**⭐ 😘😘😘😍🥰🎉🎈🎃
 
-如果该程序对你有帮助😎😎😎，希望给个⭐**star**⭐喔。😘😘😘😍🥰🎉🎈🎃
+[点击跳转至中文使用文档](https://github.com/moshang-xc/lottery/blob/master/README-ZH_CN.MD)
 
-> 立即体验一下： [https://moshang-xc.github.io/lottery/](https://moshang-xc.github.io/lottery/)
+> Try it now:  [https://moshang-xc.github.io/lottery/](https://moshang-xc.github.io/lottery/)
 
-## 技术
+## Technology Stack
 
 技术：Node + Express + Three.js
+Technology stack: Node + Express + Three.js
 
-后台通过`Express`实现
+Server: Express + Node
 
-前端抽奖界面通过`Three.js`实现 3D 抽奖球，引用了`Three.js`的官方 3D 示例
+Web Page: Three.js, References to the official 3D example of `Three.js`
 
-## 功能描述：
+## Function Description:
 
-1. 可将抽奖结果进行保存实时下载到 excel 中🎉
-2. 已抽取人员不在参与抽取，抽中的人员不在现场可以重新抽取🎁
-3. 刷新或者关掉服务器，会保存当前已抽取的数据，不会进行数据重置，只有点击界面上的重置按钮，才能重置抽奖数据🧧
-4. 每次抽取的奖品数目可配置🎈
-5. 抽取完所有奖品后还可以继续抽取特别奖(例如：现在抽取红包，追加的奖品等)，此时默认一次抽取一个🧨
+1. The result can ben save and downloaded to excel synchronously🎉
+2. The winner will not participate in the drawing, and the drawing person can be drawn again if he/she not on site🎁
+3. Refresh or trun off the server will save the winner data and will not resrt the lottery data, only by click the reset button on the page can the  lottery data be reset🧧
+4. The number of prizes is able to configure🎈
+5. After all the prizes have been drawn, you can continue to draw special prizes(For example:Red pockets, additional prizes, etc). By default, one is extracted at once
 
-## 预览
+## Preview
+
+> Try it now:  [https://moshang-xc.github.io/lottery/](https://moshang-xc.github.io/lottery/)
 
 ![lottery.gif](https://raw.githubusercontent.com/moshang-xc/blog/master/share/lottery.gif)
 
@@ -32,34 +36,32 @@
 
 ![end.jpg](https://raw.githubusercontent.com/moshang-xc/blog/master/share/end.jpg)
 
-## 安装
-
+## Install
 ```
 git clone https://github.com/moshang-xc/lottery.git
 
 cd lottery
 
-# 服务端插件安装
+# Server plugin installation
 cd server
 npm install
 
-# 前端插件安装
+# Front-end plugin installation
 cd ../product
 npm install
 
-# 打包
+# Package
 npm run build
 
-# 运行
+# Running
 npm run serve
 
-# 开发调试
+# Developing & debugging
 npm run dev
 
 ```
 
-## 目录结构
-
+## Directory Structure
 ```
 Lottery
 ├── product
@@ -78,51 +80,48 @@ Lottery
 │   └── package.js
 ```
 
-> 1. product 为前端页面目录
-> 2. package.josn web 项目配置文件
-> 3. webpack.config.js 打包配置文件
-> 4. server 为服务器目录
-> 5. config 为奖品信息的配置文件
+> 1. product is Front-end page directory
+> 4. server is Server directory
+> 5. config is Profile for prize information
 
-## 配置信息
+## Configuration Information
+### Lottery personnel list information configuration
+The lottery list information is in the **`server/data/user.xlsx`** file, information could only fill in base on the format, file name and title are not able to revise
 
-### 抽奖用户信息配置
+### Prize information configuration
+Prize information is filled in the **server/config.js** file, and the file name cannot be modified.
 
-抽奖用户信息在**`server/data/user.xlsx`**文件中，按文件格式进行填充，不能修改文件名和列头
+**The configuration of the prizes is described as follows:**
 
-### 奖品信息配置
+| Parameter | Value Type | Description                                                  |
+| --------- | ---------- | ------------------------------------------------------------ |
+| type      | Number     | Type of prize, unique identifier, 0 is the placeholder for the default special prize, other prizes cannot be used |
+| count | Number | Prizes amount                                                 |
+| text  | String |  Prizes name                                     |
+| title | String | Prizes description                                              |
+| img   | String | Image URL of the prize, image is under**img** catalog                |
 
-奖品的配置信息填写在**server/config.js**文件中，不能修改文件名。
-
-**其中奖品 prizes 的配置描述如下：**
-
-| 参数  | 值类型 | 描述                                                         |
-| ----- | ------ | ------------------------------------------------------------ |
-| type  | Number | 奖品类型，唯一标识，0 是默认特别奖的占位符，其它奖品不可使用 |
-| count | Number | 奖品数量                                                     |
-| text  | String | 奖项名称                                                     |
-| title | String | 奖品描述                                                     |
-| img   | String | 奖品的图片地址，图片在**img**目录下                          |
 
 ```js
-// 奖品信息，第一项为预留项不可修改，其他项可根据需要修改
+// Prize information, the first item is reserved and cannot be modified. Other items can be modified as required
+// Prize in
 let prizes = [{
         type: 0,
         count: 1000,
         title: "",
-        text: "特别奖"
+        text: "Special Price"
     },
     {
         type: 1,
         count: 2,
-        text: "特等奖",
-        title: "神秘大礼",
+        text: "Special Price"
+        title: "Mystery jackpot"
         img: "../img/secrit.jpg"
     },
     {
         type: 2,
         count: 5,
-        text: "一等奖",
+        text: "First prize"
         title: "Mac Pro",
         img: "../img/mbp.jpg"
     }
@@ -130,69 +129,70 @@ let prizes = [{
 ];
 ```
 
-### 奖品每次抽取个数配置
+### The configuration of the number of prizes drawn each time
 
-**EACH_COUNT**用于配置每次的抽奖个数，与 prizes 奖品一一对应，例如上面的奖品配置对应的抽奖个数配置如下：
+**EACH_COUNT**It is used to configure the number of lottery draws each time, which corresponds to the prizes one by one. For example, the number of lottery draws corresponding to the above prize configuration is as follows：
 
 ```js
 const EACH_COUNT = [1, 1, 5];
 ```
 
-如上配置，表示一次抽取的奖品个数顺序为：特别奖每次抽一个，特等奖每次抽一个，一等奖每次抽五个
+Configuration above means the order of the number of prizes to be drawn at one time is：one special prize per time, one grand prize per time and 5 first prize per time.
 
-### 企业标识配置
+### Enterprise Identity Configuration
 
-该标识用于显示在抽奖卡片上。
+This identification is used to display on the lottery card. 
 
 ```js
 const COMPANY = "MoShang";
 ```
 
 
-## Docker部署方案
+## Docker Deployment plan
 
-### 概述
+### Summary
 
-该项目现在支持使用Docker进行部署。Docker是一个轻量级的容器化平台，可以让您快速地部署、测试和运行应用程序。本文档将向您介绍如何使用Docker部署该项目。
+This project is support to deploy by Docker. Docker is a platform with lightweight containerization, allows you to quickly deploy, test and run the applications. This text will introduce how to deploy the project by Docker.
 
-### 系统要求
+### System Requirement
 
-在您开始使用Docker部署该项目之前，您需要确保已经安装了以下软件：
+Before you use the Docker to deploy the project, you need to ensure you have download below software:
 
-- Docker（请参阅Docker的官方文档以获取安装说明）
+- Docker (Please refer Docker official file to get the installation instructions)
 - Docker Compose
 
-### 安装
+### Installation
 
-1. 下载并解压该项目的源代码。
+1. Download and unzip the source code for the project
 
-2. 进入解压后的项目目录。
+2. Access the project directory after unzipped the file
 
-3. 执行以下命令以构建Docker镜像：
+3. Execute the following command to build the Docker mirror image:
 
    ```
    ./build.sh [TAG]
    ```
 
-   这将使用Dockerfile构建一个名为`lottery:[TAG]`的Docker镜像。如果未指定标签，则默认使用`latest`标签。
-
-4. 执行以下命令以在本地运行容器：
+   It will use Dockerfile to set up the Docker mirror image named `lottery:[TAG]`. If no tag is specified, the 'latest' tag is used by default
+   
+4. Execute the following command to run the local container:
 
    ```
    ./dev.sh [TAG]
    ```
 
-   这将启动容器并将应用程序部署在Docker容器中。您可以在本地进行测试，确保一切正常。请注意，容器内部的应用程序将会监听8888端口和443端口。
+   This will start the container and deploy the application in the Docker container. You can test loacally to ensure all running fulently.  
+Please be pay attention that all applicaiton in the container will monitor port 8888 and port 443.
 
-5. 执行以下命令以将Docker镜像标记并推送到远程Docker仓库：
+5. Execute the following command to tag the Docker mirror image and push it to the remote Docker repository
 
    ```
    ./tagpush.sh [TAG]
    ```
 
-   这将为Docker镜像打上标签并将其推送到远程Docker仓库，如果要使用docker官方的hub请先在https://hub.docker.com/新建自己的repo，然后将文件中的用户名改为自己。请注意，`[TAG]`应替换为您要使用的标签名称。
+   It will tag the Docker mirror image and push it to the remote Docker repository, please build up your repo at https://hub.docker.com/ if you want to us Docker official hub.
 
-6. 确保有一个名为`docker-compose.yml`的文件，并添加以下内容：
+6. Ensure it has a file named `docker-compose.yml` and add below information:
 
    ```
    version: '3.8'
@@ -214,16 +214,15 @@ const COMPANY = "MoShang";
        restart: always
    ```
 
-   请注意，`[TAG]`应替换为您推送到Docker仓库的镜像名称。
+  Kindly take note that `[TAG]` should be replaced with the name of the mirror image you pushed to the Docker repository
 
-7. 在服务器上的项目目录中运行以下命令以使用Docker Compose部署应用程序：
+7. Run the following command in the project directory on the server to deploy the application using Docker Compose:
 
 ```
 	docker-compose up -d
 ```
 
-​		这将启动一个Docker Compose堆栈，并将该项目部署在其中。请注意，此处将容器的8888端口和443端口映射		到了服务器上的8888端口和443端口。如果您希望使用其他端口，请相应地更改`docker-compose.yml`文件。
-
+8. This will start a Docker Compose stack and deploy the project into it. Note that port 8888 and port 443 of the container are mapped to port 8888 and port 443 on the server. If you wish to use a different port, please change the `docker-compose.yml` file accordingly.
 
 
 ## License

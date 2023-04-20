@@ -222,7 +222,7 @@ Please be pay attention that all applicaiton in the container will monitor port 
 	docker-compose up -d
 ```
 
-8. This will start a Docker Compose stack and deploy the project into it. Note that port 8888 and port 443 of the container are mapped to port 8888 and port 443 on the server. If you wish to use a different port, please change the `docker-compose.yml` file accordingly.
+This will start a Docker Compose stack and deploy the project into it. Note that port 8888 and port 443 of the container are mapped to port 8888 and port 443 on the server. If you wish to use a different port, please change the `docker-compose.yml` file accordingly.
 
 
 ## License

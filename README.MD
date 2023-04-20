@@ -9,7 +9,6 @@ If programm is helpful for you😎😎😎, it will be greatful to comment us wi
 
 ## Technology Stack
 
-技术：Node + Express + Three.js
 Technology stack: Node + Express + Three.js
 
 Server: Express + Node
@@ -22,7 +21,7 @@ Web Page: Three.js, References to the official 3D example of `Three.js`
 2. The winner will not participate in the drawing, and the drawing person can be drawn again if he/she not on site🎁
 3. Refresh or trun off the server will save the winner data and will not resrt the lottery data, only by click the reset button on the page can the  lottery data be reset🧧
 4. The number of prizes is able to configure🎈
-5. After all the prizes have been drawn, you can continue to draw special prizes(For example:Red pockets, additional prizes, etc). By default, one is extracted at once
+5. After all the prizes have been drawn, you can continue to draw special prizes(For example:Red pockets, additional prizes, etc). By default, one is extracted at once🧨
 
 ## Preview
 
@@ -219,7 +218,7 @@ Please be pay attention that all applicaiton in the container will monitor port 
 7. Run the following command in the project directory on the server to deploy the application using Docker Compose:
 
 ```
-	docker-compose up -d
+docker-compose up -d
 ```
 
 This will start a Docker Compose stack and deploy the project into it. Note that port 8888 and port 443 of the container are mapped to port 8888 and port 443 on the server. If you wish to use a different port, please change the `docker-compose.yml` file accordingly.

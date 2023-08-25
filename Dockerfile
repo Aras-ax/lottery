@@ -1,8 +1,5 @@
 # Use the official Node.js 16 image as base image
-FROM node:16.14.0-buster
-
-# Upgrade npm to the latest version
-RUN npm install -g npm@9.6.2
+FROM node:16.20.2-alpine3.18
 
 # Set the author of the Dockerfile
 LABEL maintainer="YIN"
@@ -21,7 +18,7 @@ RUN chown -R root /lottery \
     && cd server && npm install \
     && cd ../product && npm install \
     # Build the application
-    && npm run build
+    && npm run build && rm -rf node_modules && rm -rf src
 
 # Expose port 8080 to the outside world
 EXPOSE 8080

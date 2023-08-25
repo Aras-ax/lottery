@@ -1,0 +1,8 @@
+.gitignore
+build.sh
+dev.sh
+tagpush.sh
+README.MD
+LICENSE
+.idea
+.git

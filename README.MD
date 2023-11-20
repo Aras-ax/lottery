@@ -9,7 +9,7 @@ If programm is helpful for you😎😎😎, it will be greatful to comment us wi
 
 ## Technology Stack
 
-Technology stack: Node + Express + Three.js
+Technology stack: Node + Express + Three.js + **Vite**
 
 Server: Express + Node
 

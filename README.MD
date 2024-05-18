@@ -50,6 +50,7 @@ cd ../product
 npm install
 
 # Package
+cd ../
 npm run build
 
 # Running

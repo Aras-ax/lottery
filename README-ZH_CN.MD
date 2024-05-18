@@ -48,6 +48,7 @@ cd ../product
 npm install
 
 # 打包
+cd ../
 npm run build
 
 # 运行
